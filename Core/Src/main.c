@@ -246,6 +246,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
   }
 }
+
 */
 
 /* USER CODE END 4 */
@@ -280,3 +281,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+

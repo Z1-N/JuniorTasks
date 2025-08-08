@@ -36,7 +36,7 @@ This repository contains an STM32F103C8TX microcontroller project with various G
 
 The main.c file contains several commented programming tasks that demonstrate different approaches to LED blinking and GPIO control:
 
-### Task 1: Basic GPIO Toggle with HAL_Delay (Lines 87-90)
+### Task 1: Basic GPIO Toggle with HAL_Delay (Lines 101-104)
 ```c
 /* TASK 1
    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
@@ -47,7 +47,7 @@ The main.c file contains several commented programming tasks that demonstrate di
 **Implementation**: Toggle PA0 every 250ms using HAL_Delay()
 **Note**: This is a blocking approach that stops the entire program execution during delay
 
-### Task 2: Non-blocking GPIO Toggle with HAL_GetTick (Lines 93-99)
+### Task 2: Non-blocking GPIO Toggle with HAL_GetTick (Lines 107-113)
 ```c
 /*TASK 2
 if((HAL_GetTick() - tick) >= 250){
@@ -60,14 +60,26 @@ if((HAL_GetTick() - tick) >= 250){
 **Implementation**: Toggle PA0 every 250ms using HAL_GetTick() for timing
 **Advantage**: Allows other code to run during the delay period
 
-### Task 4: Timer Interrupt-based GPIO Toggle (Lines 249-257)
+### Task 3: Timer Interrupt-based GPIO Toggle (Lines 240-249)
+```c
+/*TASK3
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim->Instance == TIM2)
+  {
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+  }
+}
+*/
+```
+### Task 4: Timer Interrupt-based GPIO Toggle (Lines 250-258)
 ```c
 /*TASK4
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM2)
   {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    GPIOA->ODR ^= GPIO_PIN_0;
   }
 }
 */
@@ -124,7 +136,7 @@ To test each task:
 
 1. **Task 1**: Uncomment lines 87-90 in main.c and flash
 2. **Task 2**: Uncomment lines 93-99 in main.c and flash
-3. **Task 4**: Uncomment lines 249-257 in main.c and flash
+3. **Task 3**: Uncomment lines 249-257 in main.c and flash
 
 **Expected Result**: LED on PA0 will blink every 250ms (4Hz frequency)
 
@@ -139,9 +151,10 @@ To test each task:
 
 | Task | File Location | Line Numbers | Description |
 |------|---------------|--------------|-------------|
-| Task 1 | `Core/Src/main.c` | Lines 87-90 | Basic blocking delay method |
-| Task 2 | `Core/Src/main.c` | Lines 93-99 | Non-blocking tick-based method |
-| Task 4 | `Core/Src/main.c` | Lines 249-257 | Timer interrupt callback method |
+| Task 1 | `Core/Src/main.c` | Lines 101-104 | Basic blocking delay method |
+| Task 2 | `Core/Src/main.c` | Lines 107-113 | Non-blocking tick-based method |
+| Task 3 | `Core/Src/main.c` | Lines 240-249 | Timer interrupt callback method |
+| Task 4 | `Core/Src/main.c` | Lines 250-258 | Baremetal with HAL for config method |
 
 ## Additional Information
 
