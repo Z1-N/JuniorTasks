@@ -9,7 +9,7 @@ This repository contains an STM32F103C8TX microcontroller project with various G
 - **Microcontroller**: STM32F103C8TX (Blue Pill board)
 - **Architecture**: ARM Cortex-M3
 - **Clock Configuration**: 72MHz (HSE + PLL)
-- **GPIO Used**: PA0 (Output)
+- **GPIO Used**: PC13 (Output)
 - **Timer Used**: TIM2 (Timer 2)
 
 ## Project Structure
@@ -39,7 +39,7 @@ The main.c file contains several commented programming tasks that demonstrate di
 ### Task 1: Basic GPIO Toggle with HAL_Delay (Lines 101-104)
 ```c
 /* TASK 1
-   HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+   HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
    HAL_Delay(250);
 */
 ```
@@ -51,7 +51,7 @@ The main.c file contains several commented programming tasks that demonstrate di
 ```c
 /*TASK 2
 if((HAL_GetTick() - tick) >= 250){
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
     tick = HAL_GetTick();
 }
 */
@@ -67,7 +67,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM2)
   {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
   }
 }
 */
@@ -79,7 +79,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM2)
   {
-    GPIOA->ODR ^= GPIO_PIN_0;
+    GPIOC->ODR ^= GPIO_PIN_13;
   }
 }
 */
@@ -102,8 +102,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 ## GPIO Configuration
 
-### PA0 Configuration (Lines 220-230)
-- **Pin**: PA0
+### PC13 Configuration (Lines 220-230)
+- **Pin**: PC13
 - **Mode**: GPIO_MODE_OUTPUT_PP (Push-Pull Output)
 - **Pull**: GPIO_NOPULL (No pull-up/pull-down)
 - **Speed**: GPIO_SPEED_FREQ_LOW
@@ -138,7 +138,7 @@ To test each task:
 2. **Task 2**: Uncomment lines 93-99 in main.c and flash
 3. **Task 3**: Uncomment lines 249-257 in main.c and flash
 
-**Expected Result**: LED on PA0 will blink every 250ms (4Hz frequency)
+**Expected Result**: LED on PC13 will blink every 250ms (4Hz frequency)
 
 ## Development Notes
 
