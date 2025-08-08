@@ -99,7 +99,7 @@ int main(void)
   while (1)
   {
 	  /* TASK 1
-	     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+	     HAL_GPIO_TogglePin(GPIOCC, GPIO_PIN_13);
 	     HAL_Delay(250);
 	  */
 
@@ -107,7 +107,7 @@ int main(void)
 	  /*TASK 2
 
 	  if((HAL_GetTick() - tick) >= 250){
-		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+		  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 		  tick = HAL_GetTick();
 	  }
 	  */
@@ -219,17 +219,16 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PA0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
@@ -237,18 +236,18 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-/*TASK4
+/*TASK3
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM2)
   {
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
   }
 }
-
 */
+
 /* USER CODE END 4 */
 
 /**
