@@ -44,7 +44,7 @@ The main.c file contains several commented programming tasks that demonstrate di
 */
 ```
 **Purpose**: Simple LED blinking using blocking delay
-**Implementation**: Toggle PA0 every 250ms using HAL_Delay()
+**Implementation**: Toggle PC13 every 250ms using HAL_Delay()
 **Note**: This is a blocking approach that stops the entire program execution during delay
 
 ### Task 2: Non-blocking GPIO Toggle with HAL_GetTick (Lines 107-113)
@@ -57,7 +57,7 @@ if((HAL_GetTick() - tick) >= 250){
 */
 ```
 **Purpose**: Non-blocking LED blinking using system tick
-**Implementation**: Toggle PA0 every 250ms using HAL_GetTick() for timing
+**Implementation**: Toggle PC13 every 250ms using HAL_GetTick() for timing
 **Advantage**: Allows other code to run during the delay period
 
 ### Task 3: Timer Interrupt-based GPIO Toggle (Lines 240-249)
@@ -85,7 +85,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 */
 ```
 **Purpose**: Hardware timer-based LED blinking using interrupts
-**Implementation**: Timer 2 generates interrupts every 250ms to toggle PA0
+**Implementation**: Timer 2 generates interrupts every 250ms to toggle PC13
 **Advantage**: Most precise timing, completely non-blocking, minimal CPU overhead
 
 ## Timer Configuration
